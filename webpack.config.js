@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const DotenvWebpack = require('dotenv-webpack');
 
 module.exports = {
 	entry: './src/app.js', // 기준이 되는 JS 파일
@@ -26,6 +27,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'index.html',
 			filename: 'index.html',
+		}),
+		new DotenvWebpack({
+			path: `./.env.${process.env.NODE_ENV || 'development'}`,
 		}),
 	],
 	devServer: {
