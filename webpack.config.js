@@ -1,11 +1,13 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: './src/app.js', // 기준이 되는 JS 파일
 	output: {
 		// 번들링을 하는 규칙
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js',
+		filename: 'bundle.[contenthash].js',
 	},
 	module: {
 		rules: [
@@ -18,6 +20,21 @@ module.exports = {
 				},
 			},
 		],
+	},
+	plugins: [
+		new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			template: 'index.html',
+			filename: 'index.html',
+		}),
+	],
+	devServer: {
+		static: {
+			directory: path.join(__dirname, 'dist'), // 파일이 위치한 폴더
+		},
+		port: 9000,
+		open: true,
+		hot: true, // 저장하면 바로 반영
 	},
 	mode: 'development', // 없으면 warning 이 남
 };
