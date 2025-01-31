@@ -15,12 +15,10 @@
 
 <script>
     const App = () => {
-        return (
-            <div>
-                <h1>Say Hello!</h1>
-            </div>
-        )
-    }
+        return React.createElement("h1", null, "Hello, World!");
+    };
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(React.createElement(App));
 </script>
 
 </html>
